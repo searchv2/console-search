@@ -15,6 +15,10 @@ COPY . .
 RUN dotnet publish ConsoleSearch.csproj -c Release -o /app
 
 FROM mcr.microsoft.com/dotnet/runtime:10.0 AS runtime
+ARG VERSION=1.0.1
+LABEL org.opencontainers.image.title="searchv2-console" \
+      org.opencontainers.image.version="${VERSION}" \
+      org.opencontainers.image.source="https://github.com/searchv2/console-search"
 WORKDIR /app
 COPY --from=build /app .
 
