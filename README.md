@@ -36,6 +36,16 @@ dotnet build
 dotnet run
 ```
 
+## Docker
+
+```bash
+docker build -t searchv2-console .
+docker run --rm -it -e SEARCH_API_BASE_URL=http://host.docker.internal:5071 searchv2-console
+```
+
+`SEARCH_API_BASE_URL` points at the search service (defaults to
+`http://search-api:8080` for `docker compose`). See `../docker-compose.yml`.
+
 ## Usage
 
 Once running, type search terms and press enter:
