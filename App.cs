@@ -6,10 +6,12 @@ namespace ConsoleSearch
 {
     public class App
     {
+        private readonly ISearchClient searchClient;
+
+        public App(ISearchClient searchClient) => this.searchClient = searchClient;
 
         public async Task Run()
         {
-            ISearchClient searchClient = SearchClientFactory.Create();
             Console.WriteLine("Console Search");
 
             while (true)

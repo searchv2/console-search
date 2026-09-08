@@ -6,12 +6,11 @@ matching documents.
 
 ## How it works
 
-- `Program.cs` starts the app and hands off to `App.cs`, which runs the
-  read-search-print loop.
-- `SearchClientFactory` builds an `ISearchClient` (currently a
-  `HttpSearchClient`); `App.cs` only ever talks to the `ISearchClient`
-  interface, so the underlying transport can change later without touching
-  the loop.
+- `Program.cs` is the composition root: it registers the services in a DI
+  container and resolves `App`, which runs the read-search-print loop.
+- `App.cs` is injected with an `ISearchClient` (currently a `HttpSearchClient`)
+  and only ever talks to that interface, so the underlying transport can change
+  later - swap the one registration in `Program.cs` - without touching the loop.
 - `HttpSearchClient` posts each query to `api/search` on the search service
   and deserializes the `SearchResult` response.
 - `ApiConfig.SEARCH_API_BASE_URL` sets the base URL of the search service
